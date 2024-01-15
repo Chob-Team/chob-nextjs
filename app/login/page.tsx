@@ -1,13 +1,17 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import axios from "axios";
+import { setItem, getItem } from '../../localStore';
+
+
 const LoginPage: React.FC = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false); // Add rememberMe state
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.target.value);
+    setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,13 +22,25 @@ const LoginPage: React.FC = () => {
     setRememberMe(!rememberMe);
   };
 
-  const handleLogin = () => {
-    // Handle login logic here
-  };
+  const handleLogin = async () => {
+    // Call login API 127.0.0.1:8010/login sand json {username, password} and get response {token} and save to localStorage if rememberMe is true
+    const response = await axios.post("http://127.0.0.1:8010/login", {
+      email,
+      password,
+    });
+    const token = response.data.token;
+    //setitem user token
+    const employee = response.data.employee;
+    setItem('employee', employee);
+    setItem('token', token);
+
+  }
+
+
 
   return (
-    <div className="bg-gray-100 flex justify-center items-center h-screen">
-      <div className="card shadow-xl bg-white w-2/5  ">
+    <div className="bg-gray-100 flex justify-center items-center h-screen ">
+      <div className="card shadow-xl bg-white sm:w-2/5 ">
         <div className=" p-14">
           {/* Logo */}
           <div className="flex justify-center">
@@ -35,17 +51,17 @@ const LoginPage: React.FC = () => {
               />
             </div>
           </div>
-          {/* username */}
+          {/* email */}
           <div className="mt-4 text-gray-400 col-auto pt-2">
             <div>
-              <label className="">username</label>
+              <label className="">email</label>
             </div>
             <div className="pt-2">
               <input
-                type="text"
+                type="email"
                 className=" border-separate border-2 border-gray-200 rounded-md w-full px-3 py-2 outline-none focus:border-blue-400"
-                placeholder="Enter username"
-                value={username}
+                placeholder="Enter email"
+                value={email}
                 onChange={handleUsernameChange}
               />
             </div>

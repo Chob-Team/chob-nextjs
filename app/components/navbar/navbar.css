@@ -1,0 +1,96 @@
+/* FILEPATH: /Users/folk/Documents/GitHub/chob-nextjs/app/components/navbar/navbar.css */
+
+/* Header */
+header {
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Menu */
+.menu {
+    list-style: none;
+    display: flex;
+}
+
+.menu li {
+    margin-right: 10px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* Profile Icon */
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #333;
+}
+
+/* Dark Mode Switch */
+.dark-mode-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.dark-mode-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.dark-mode-switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+}
+
+.dark-mode-switch .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+}
+
+.dark-mode-switch input:checked + .slider {
+    background-color: #333;
+}
+
+.dark-mode-switch input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.dark-mode-switch .slider.round {
+    border-radius: 34px;
+}
+
+.dark-mode-switch .slider.round:before {
+    border-radius: 50%;
+}
